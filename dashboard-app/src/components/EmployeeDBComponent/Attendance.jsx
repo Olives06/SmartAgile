@@ -68,24 +68,26 @@ const data2 = [
 
 const EmpAttendance=() =>{
   return (
+    <div className='bg-white w-72 rounded-lg shadow-2xl'>
+      <p className='font-semiboid text-2xl mt-4 ml-4'>Attendance</p>
     <PieChart
       series={[
         {
           data: data2,
-          cx: 500,
-          cy: 200,
+          //cx: 500,
+          //cy: 200,
           innerRadius: 40,
           outerRadius: 80,
         },
       ]}
       height={300}
-      width={700}
+      width={300}
 
       slotProps={{
         legend: { hidden: false },
       }}
     />
-    
+    </div>
   );
 }
 

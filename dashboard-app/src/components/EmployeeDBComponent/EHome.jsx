@@ -1,13 +1,12 @@
 import { PieChart } from '@mui/x-charts/PieChart';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import React, { useState} from 'react';
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { FiPlay, FiPause, FiCheck } from 'react-icons/fi'; // Importing some icons from react-icons
 import 'tailwindcss/tailwind.css';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
+import { Box, Card, CardMedia, CardContent, Typography, IconButton } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -21,17 +20,16 @@ const EHome = () => {
             <KCard title='Time At Work' content={'197h 57m'}/>
             <KCard title='Offline Time' content={<div className='text-3xl text-red-500'>8h 20m</div>}/>
             <KCard title='Projects Time' content={'2h 57m'}/>
-            <KCard title='Effectiveness' content={'48.76%'}/>
-            <KCard title='Productivity' content={'77.1%'}/>
+            <Attendance/>
         </div>
         <div className='flex flex-nowrap grid-cols-3 gap-x-4'>
           <ProjectTasks/>
           <ProductivityChart/>
-          <Attendance/>
-        </div>
-        <div className='flex flex-nowrap grid-cols-2'>
-          <EmployeeActivity/>
           <ScheduleCard/>
+        </div>
+        <div className='flex flex-nowrap grid-cols-2 gap-4'>
+          <EmployeeActivity/>
+          
         </div>
     </div>
   )
@@ -54,7 +52,7 @@ const KCard = ({ title, content }) => {
   
 const Productivity=()=>{
   return(
-    <div className='justify-center rounded-lg transition-shadow duration-300 hover:shadow-xl'>
+    <div className='justify-center bg-white rounded-lg transition-shadow duration-300 hover:shadow-xl'>
       <b>Productivity</b>
       <PieChart
       series={[
@@ -75,6 +73,7 @@ const Productivity=()=>{
       height={200}
       width={350}
     />
+    
     </div>
   );
 }
@@ -90,7 +89,7 @@ const tasksData = [
 
 const ScheduleCard = () => {
   return (
-    <div className="max-w-sm bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div className="max-w-sm bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl ">
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-4">Schedule</h2>
         <div className="mb-4 flex items-center">
@@ -109,6 +108,7 @@ const ScheduleCard = () => {
         </div>
         <button className="w-full bg-blue-500 text-white py-2 mt-4 rounded-lg">Set Reminder</button>
       </div>
+      <Productivity/>
     </div>
   );
 };
@@ -127,7 +127,7 @@ const Attendance=()=>{
         </tbody>
       </table>
       </div><br/>
-      <EmpOnLeave/>
+      
     </div>
   );
 };
@@ -191,35 +191,74 @@ const screenshots = [
   { title: "Slack", time: "14:36", task: "A/B Testing", name: "Elizabeth Ferguson", department: "UX/UI Design", imageUrl: "/path/to/slack.png" }
 ];
 
+const scrollContainerStyle = {
+  display: 'flex',
+  overflowX: 'auto',
+  scrollBehavior: 'smooth',
+  padding: '10px 0',
+  width: '700px', // Width set to accommodate 3 cards at a time
+};
+
+const cardStyle = {
+  minWidth: 220,
+  margin: '0 10px',
+  boxShadow: 3,
+};
+
 const EmployeeActivity = () => {
+  const scrollRef = React.useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' }); // Scroll by one card width
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' }); // Scroll by one card width
+    }
+  };
+
   return (
-    <div className="flex flex-nowrap justify-center">
-      {screenshots.map((screenshot, index) => (
-        <Card key={index} sx={{ maxWidth: 300, margin: 0.5, boxShadow: 3 }}>
-          <CardMedia
-            sx={{ height: 140 }}
-            image={screenshot.imageUrl}
-            title={screenshot.title}
-          />
-          <CardContent>
-            <Typography variant="h6" component="div">
-              {screenshot.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="div">
-              {screenshot.time} - {screenshot.task}
-            </Typography>
-            <Typography variant="body2" component="div">
-              {screenshot.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="div">
-              {screenshot.department}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+    <div className='bg-white rounded-lg my-4 ml-4'>
+      <p className='text-2xl font-semibold mb-2'>Recent Activity</p>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <IconButton onClick={scrollLeft}>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <Box sx={scrollContainerStyle} ref={scrollRef}>
+          {screenshots.map((screenshot, index) => (
+            <Card key={index} sx={cardStyle}>
+              <CardMedia
+                sx={{ height: 140 }}
+                image={screenshot.imageUrl}
+                title={screenshot.title}
+              />
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  {screenshot.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="div">
+                  {screenshot.time} - {screenshot.task}
+                </Typography>
+                <Typography variant="body2" component="div">
+                  {screenshot.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="div">
+                  {screenshot.department}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+        <IconButton onClick={scrollRight}>
+          <ArrowForwardIosIcon />
+        </IconButton>
+      </Box>
     </div>
   );
-}
+};
 
 const ProductivityChart = () => {
   const data = {
@@ -244,6 +283,7 @@ const ProductivityChart = () => {
 
   const options = {
     responsive: true,
+    
     plugins: {
       legend: {
         display: false,
@@ -266,9 +306,9 @@ const ProductivityChart = () => {
   };
 
   return (
-    <div className="p-4 w-72 bg-white rounded-xl shadow-md space-y-4">
+    <div className="p-4 w-96 bg-white rounded-xl shadow-md space-y-4 justify-center">
       <h2 className="text-2xl font-bold">Top Apps and Websites Chart</h2>
-      <Pie data={data} options={options} />
+      <Pie data={data} options={options} width={450} height={450}/>
       <div className="flex flex-col space-y-2">
         <div className="flex items-center">
           <div className="w-3 h-3 bg-green-400 mr-2"></div>

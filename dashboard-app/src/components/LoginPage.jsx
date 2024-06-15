@@ -8,7 +8,7 @@ const LoginPage = () => {
     if (role === 'admin') {
       navigate('/loging');
     } else {
-      navigate('/loging');
+      navigate('/emplogin');
     }
   };
 
