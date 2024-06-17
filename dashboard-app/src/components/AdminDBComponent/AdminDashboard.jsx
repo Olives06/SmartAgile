@@ -11,10 +11,10 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import GHome from './GHome';
+import AHome from './AHome';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const GroupDashboard = () => {
+const EmployeeDashboard = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -101,13 +101,14 @@ function VerticalTabs() {
         sx={{ borderRight: 1, borderColor: 'divider',width:120,mt:4,mr:0,bgcolor:'gray-100' ,justifyContent:'left'}}
       >
         <Tab label="Dashboard" {...a11yProps(0)} />
-
+        
       </Tabs>
       <TabPanel value={value} index={0}>
-        <GHome/>
+        <AHome/>
       </TabPanel>
+      
     </Box>
   );
 }
 
-export default GroupDashboard;
+export default EmployeeDashboard;

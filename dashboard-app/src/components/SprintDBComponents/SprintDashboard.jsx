@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import SHome from './SHome';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 const SprintDashboard = () => {
@@ -31,13 +32,13 @@ const SprintDashboard = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
-          <IconButton color="inherit">
-            <MailIcon />
-          </IconButton>
+          <Avatar alt="User Avatar" src="/emp3.jpg" />
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <Avatar alt="User Avatar" src="/emp3.jpg" />
+          <IconButton color="inherit">
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <div className='mt-8'>

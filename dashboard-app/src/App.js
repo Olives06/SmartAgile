@@ -10,6 +10,7 @@ import GroupDashboard from './components/GroupDBComponent/GroupDashboard';
 import SprintDashboard from './components/SprintDBComponents/SprintDashboard';
 //import EmployeeProfiles from './components/EmployeeProfiles';
 import Register from './components/register';
+import AdminDashboard from './components/AdminDBComponent/AdminDashboard';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
       <Route path="/group/dashboard" element={<GroupDashboard />} />
       <Route path="/admin/sprint-dashboard" element={<SprintDashboard />} />
+      <Route path="/admin/admin-dashboard" element={<AdminDashboard />} />
       {/*<Route path="/admin/employee-profiles" element={<EmployeeProfiles />} />*/}
     </Routes>
   );

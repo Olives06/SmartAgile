@@ -4,7 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +17,7 @@ import Attendance from './Attendance';
 import Projects from './Projects';
 import AppsWebsites from './AppsWebsites';
 import Settings from './Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const EmployeeDashboard = () => {
   return (
@@ -35,13 +35,13 @@ const EmployeeDashboard = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
-          <IconButton color="inherit">
-            <MailIcon />
-          </IconButton>
+          <Avatar alt="User Avatar" src="/emp3.jpg" />
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <Avatar alt="User Avatar" src="/emp3.jpg" />
+          <IconButton color="inherit">
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <div className='mt-8'>
