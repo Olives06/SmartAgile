@@ -1,10 +1,8 @@
-// src/components/EmployeeDBComponent/EmployeeDashboard.jsx
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,9 +12,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import SHome from './SHome';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import { useNavigate } from 'react-router-dom';
 
 const SprintDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    navigate('/login');
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -36,7 +40,7 @@ const SprintDashboard = () => {
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>

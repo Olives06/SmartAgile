@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import AdminLogin from './components/AdminLogin';
+import ForgotPassword from './components/ForgotPassword';
 import EmpLogin from './components/EmpLogin';
 import AboutUs from './components/AboutUs';
 import EmployeeDashboard from './components/EmployeeDBComponent/EmployeeDashboard';
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/loging" element={<AdminLogin />} />
+      <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/emplogin" element={<EmpLogin />} />
       <Route path="/register" element={<Register />} />
       <Route path="/aboutus" element={<AboutUs />} />

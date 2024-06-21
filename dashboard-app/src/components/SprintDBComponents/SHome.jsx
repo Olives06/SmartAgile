@@ -10,10 +10,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Avatar, Typography, LinearProgress } from '@mui/material';
 import { blue, green, red } from '@mui/material/colors';
-import {  Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ChartsLegend } from '@mui/x-charts';
-import { LegendToggle, LegendToggleTwoTone } from '@mui/icons-material';
-import { Title } from 'chart.js';
+
 
 const SHome = () => {
   return (

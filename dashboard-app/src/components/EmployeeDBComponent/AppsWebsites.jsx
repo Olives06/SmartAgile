@@ -244,9 +244,9 @@ const EmployeeActivityTable = () => {
           <TableHead className="bg-gray-200">
             <TableRow className='h-2'>
               <TableCell>App/Website</TableCell>
-              {/*<TableCell>Open Time</TableCell>
+              <TableCell>Open Time</TableCell>
               <TableCell>Close Time</TableCell>
-              <TableCell>Typing Activity</TableCell>*/}
+              <TableCell>Typing Activity</TableCell>
               <TableCell>Duration (min)</TableCell>
               <TableCell>Activity (%)</TableCell>
               <TableCell>Productive</TableCell>
@@ -261,9 +261,9 @@ const EmployeeActivityTable = () => {
                     <span className="ml-2">{row.app}</span>
                   </Box>
                 </TableCell>
-                {/*<TableCell>{row.openTime}</TableCell>
+                <TableCell>{row.openTime}</TableCell>
                 <TableCell>{row.closeTime}</TableCell>
-                <TableCell>{row.typingActivity}</TableCell>*/}
+                <TableCell>{row.typingActivity}</TableCell>
                 <TableCell>
                   <Box className="text-sm">
                     <span>{row.active}</span>

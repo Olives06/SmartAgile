@@ -49,6 +49,11 @@ const AdminLogin = () => {
             Login
           </button>
         </div>
+        <div className="text-center mt-4">
+          <a href="/forgotpassword" className="text-blue-500 hover:underline">
+            Forgot Password?
+          </a>
+        </div>
       </div>
     </div>
   );

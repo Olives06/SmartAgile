@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/smartagilelogo.png';
 
-const AdminLogin = () => {
+const EmpLogin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Hardcoded credentials (for demonstration purposes only)
+    
     const adminCredentials = { username: 'admin', password: 'admin123' };
     const employeeCredentials = { username: 'employee', password: 'emp123' };
 
@@ -49,9 +49,14 @@ const AdminLogin = () => {
             Login
           </button>
         </div>
+        <div className="text-center mt-4">
+          <a href="/forgotpassword" className="text-blue-500 hover:underline">
+            Forgot Password?
+          </a>
+        </div>
       </div>
     </div>
   );
 };
 
-export default AdminLogin;
+export default EmpLogin;

@@ -16,8 +16,8 @@ const EHome = () => {
   return (
     <div className='bg-gray-100 flex flex-col'>
         <div className='grid grid-cols-6'>
-            <KCard title='Desktime Time' content={'141h 39m'}/>
-            <KCard title='Time At Work' content={'197h 57m'}/>
+            {/*<KCard title='Desktime Time' content={'141h 39m'}/>*/}
+            <KCard title='Time At Work' content={'9h 57m'}/>
             <KCard title='Offline Time' content={<div className='text-3xl text-red-500'>8h 20m</div>}/>
             <KCard title='Projects Time' content={'2h 57m'}/>
             <Attendance/>
@@ -306,7 +306,7 @@ const ProductivityChart = () => {
   };
 
   return (
-    <div className="p-4 w-96 bg-white rounded-xl shadow-md space-y-4 justify-center">
+    <div className="p-4 w-72 bg-white rounded-xl shadow-md space-y-4 justify-center">
       <h2 className="text-2xl font-bold">Top Apps and Websites Chart</h2>
       <Pie data={data} options={options} width={450} height={450}/>
       <div className="flex flex-col space-y-2">
@@ -377,7 +377,7 @@ const TaskCard = ({ task }) => {
 
 const ProjectTasks = () => {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-md mx-auto ml-2">
+    <div className="p-6 bg-white rounded-lg shadow-md w-84 ml-2">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-gray-900">Project 1</h2>
         <select className="text-sm text-gray-600 border-gray-300 rounded">

@@ -18,8 +18,15 @@ import Projects from './Projects';
 import AppsWebsites from './AppsWebsites';
 import Settings from './Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    navigate('/login');
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -39,7 +46,7 @@ const EmployeeDashboard = () => {
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>

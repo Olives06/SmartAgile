@@ -13,8 +13,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import GHome from './GHome';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const GroupDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    navigate('/login');
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -34,7 +41,7 @@ const GroupDashboard = () => {
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>
