@@ -1,5 +1,4 @@
-// src/components/EmployeeDBComponent/EmployeeDashboard.jsx
-import React from 'react';
+import React,{ useState, useEffect ,useRef  } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -8,14 +7,15 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import AHome from './AHome';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { Switch } from '@mui/material';
 
-const EmployeeDashboard = () => {
+const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -37,6 +37,9 @@ const EmployeeDashboard = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             SmartAgile
           </Typography>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 20 }}>
+            <Timer/>
+          </Typography>
           <Avatar alt="User Avatar" src="/emp3.jpg" />
           <IconButton color="inherit">
             <NotificationsIcon />
@@ -56,7 +59,12 @@ const EmployeeDashboard = () => {
 };
 
 
-function TabPanel(props) {
+const a11yProps = (index) => ({
+  id: `vertical-tab-${index}`,
+  'aria-controls': `vertical-tabpanel-${index}`,
+});
+
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -69,53 +77,126 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
   );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
-
-function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
+const VerticalTabs = () => {
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 400}}
-    >
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider',width:120,mt:4,mr:0,bgcolor:'gray-100' ,justifyContent:'left'}}
+    <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          position: 'fixed',
+          height: '100%',
+          bgcolor: 'background.paper',
+          borderRight: 1,
+          borderColor: 'divider',
+          width: 64,
+          mt: 3.5,
+          borderRadius: 2, // Adjust the border radius as needed
+        }}
       >
-        <Tab label="Dashboard" {...a11yProps(0)} />
+        <Tabs
+          orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{
+            '& .MuiTab-root': {
+              textTransform: 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: 72, // Adjust height for better appearance
+              minWidth: 64,
+              fontSize:10,
+              '&.Mui-selected': {
+                fontWeight: 'bold',
+                borderRadius: 2,
+                fontSize:10,
+              },
+            },
+            '& .MuiTab-wrapper': {
+              flexDirection: 'column',
+            },
+            '& .MuiTabs-indicator': {
+              left: 0,
+              width: '1%',
+              borderRadius: 2,
+              
+            },
+          }}
+        >
+          <Tab icon={<DashboardIcon />} label="Dashboard" {...a11yProps(0)} />
+          
+        </Tabs>
+      </Box>
+      <Box sx={{ flexGrow: 1, ml: 8 }}>
+        <TabPanel value={value} index={0}>
+          <AHome />
+        </TabPanel>
         
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <AHome/>
-      </TabPanel>
-      
+      </Box>
     </Box>
   );
-}
+};
+const Timer = () => {
+  const [isOn, setIsOn] = useState(false);
+  const [time, setTime] = useState(0);
+  const timerRef = useRef(null);
 
-export default EmployeeDashboard;
+  useEffect(() => {
+    if (isOn) {
+      timerRef.current = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+
+    return () => clearInterval(timerRef.current);
+  }, [isOn]);
+
+  const handleToggle = () => {
+    setIsOn(prevIsOn => !prevIsOn);
+  };
+
+  const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <div>
+        <Switch
+          checked={isOn}
+          onChange={handleToggle}
+          sx={{
+            '& .MuiSwitch-switchBase.Mui-checked': {
+              color: 'white',
+            },
+            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+              backgroundColor: 'white',
+            },
+          }}
+        />
+      </div>
+      <div className="text-sm mb-4">
+        {isOn ? `Timer: ${formatTime(time)}` : 'Timer is off'}
+      </div>
+    </div>
+  );
+};
+export default AdminDashboard;

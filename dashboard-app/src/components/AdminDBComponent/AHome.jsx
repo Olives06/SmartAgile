@@ -6,8 +6,9 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-
-const SHome = () => {
+import { Component } from 'react';
+import CanvasJSReact from '@canvasjs/react-charts';
+const AHome = () => {
   return (
     <>
     <div className='flex flex-nowrap gap-x-3'>
@@ -34,5 +35,4 @@ const SHome = () => {
     </>
   );
 };
-  
-export default SHome;
+export default AHome;
